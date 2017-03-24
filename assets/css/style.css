@@ -120,11 +120,13 @@ h2, h3, #wins, #losses{
 
 
 #copyright {
-	font-family: 'Snell Roundhand', Papyrus, Times, Times New Roman, serif;
+	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
 	padding-top: 30px;
 	color: #eee;
-	font-size: 30px;
-	bottom: 30px;
+	font-size: 20px;
+	position: absolute; 
+	bottom: 15px;
+	text-align: right;
 }
 
 
