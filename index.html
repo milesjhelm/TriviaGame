@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guillotine</title>
+
+  <!-- Link to JavaScript file -->
+  <script type="text/javascript" src="assets/javascript/app.js"></script>
+
+  <!-- Link to Bootstrap-->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"> -->
+
+  <!-- Link to a bootswatch.com style "Cyborg" -->
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+
+  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+</head>
+<body onload="setGame();">
+
+
+  <div id="main-container" class="container">
+    <div class="row">
+      <!-- <div class="jumbotron"> -->
+      <h1 class="text-center">Heroes of Computer Science</h1>
+      <h2 id="citizen">Trivia Game!</h3>
+      <!-- </div> -->
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <img  id="guillotine" src="assets/images/guillotine.gif">
+      </div>
+      <div id="game-panel" class="col-md-offset-2 col-md-8">
+        <p id="blanks"></p>
+        <p id="theAnswer"></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <h2 id="guesses">Make your first guess!</h2>
+        <p id="wins">Wins: 0</p>
+        <p id="losses">Losses: 0</p>
+      </div>
+      <div class="col-md-7">
+        <h2>Guesses so far:</h2>
+        <p id="characterGuesses"><p>
+
+      </div>
+<!--     </div>
+      <div class="row">
+        <div class="col-md-offset-4 col-md-7">
+          <h2 id="characterGuesses"></h2>
+        </div>
+      </div> -->
+<!--       <div class="row">
+        <div class="col-md-offset-4 col-md-7">
+          <h2 id="playAgain"></h2>
+        </div>
+      </div> -->
+    </div>
+  </div>
+
+  <div class="container">
+    <p id="copyright">
+      &copy; Copyright 2017 Miles Helm
+    </p>
+  </div>
+
+  
+</body>
+</html>
