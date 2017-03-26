@@ -9,6 +9,9 @@ var newGame = false;
 var right = 0;
 var wrong = 0;
 
+// Make sure user can only choose one answer.
+var firstAnswer = true;
+
 // The number of questions to be asked;
 var totalQuestions = 10;
 
@@ -82,21 +85,39 @@ var game = [{"question" : "The principal creators of Unix",
     "info" : "Ritchie is also famous as the creator of the C programming language."}
     ];
 
+// This array of integers is used to keep track of which questions have been asked.
+// If the user decides to play the game again, the questions will be drawn from the same overall
+// pool of questions, but they won't have all the same questions and the questions won't come in
+// the same order.
+var questionsIndex;
+function setQuestionsIndex() {
+  for (var i = 0; i < game.length; i++);
+}
+
+
 
 $(".answer").click(function(){
+
+
     // alert("The paragraph was clicked.");
-    if ((thisQuestion.correctAnswer) === ($(this).attr("id"))) {
-      // alert("Right");
-      // $($(this).attr("id")).text("right");
-      $("#info").html("<div><bold>Correct!</bold>" + thisQuestion.info + "</div>");
-      right++;
+    if (firstAnswer === true) {
+      if ((thisQuestion.correctAnswer) === ($(this).attr("id"))) {
+        // alert("Right");
+        // $($(this).attr("id")).text("right");
+        $("#info").html("<div><bold>Correct!</bold>" + thisQuestion.info + "</div>");
+        right++;
+        setTimeout(function(){ askQuestion(); }, 9000);
+      }
+      else {
+        $("#info").html("<div><bold>Incorrect!</bold>" + thisQuestion.info + "</div>");
+        setTimeout(function(){ askQuestion(); }, 9000);
+        wrong++;
+      }
+      firstAnswer = false;
+      stop(); 
     }
-    else {
-      $("#info").html("<div><bold>Incorrect!</bold>" + thisQuestion.info + "</div>");
-      // alert("wrong");
-      wrong++;
-    }
-    stop();
+
+   
 });
 
 // Timer functions
@@ -111,21 +132,21 @@ function decrement() {
   timerNumber--;
 
   //  Show the number in the #show-number tag.
-  $("#timer").html("<br>Time: " + timerNumber);
+  $("#timer").html("Timer: " + timerNumber);
   // $("#timer").html("<a href='#tabs-1'>Countdown:</a><a href='#tabs-2'>" + number + "</a>");
 
 
   //  Once number hits zero...
-  if (timerNumber === 0) {
+  if (timerNumber <= 0) {
 
     //  ...run the stop function.
     stop();
 
     //  Alert the user that time is up.
-    $("#info").html("<div><bold>Time's up!</bold>" + thisQuestion.info + "</div>");
-      // alert("wrong");
-      wrong++;
-    // alert("Time Up!");
+    $("#info").html("Time's up! " + thisQuestion.info + "</div>");
+    setTimeout(function(){ askQuestion(); }, 9000);
+    wrong++;
+    timerNumber = 10;
   }
 }
 
@@ -146,6 +167,8 @@ function introRules(){
 }
 
 function askQuestion() {
+  firstAnswer = true;
+  timerNumber = 10;
   var gameIndex = Math.floor((Math.random() * (game.length - 1) + 1));
   thisQuestion = game.splice( gameIndex, 1 )[0]; 
 
@@ -155,17 +178,11 @@ function askQuestion() {
   $("#answer2").html("<div class='answers'>" + thisQuestion.answers[1] + "</div>");
   $("#answer3").html("<div class='answers'>" + thisQuestion.answers[2] + "</div>");
   $("#answer4").html("<div class='answers'>" + thisQuestion.answers[3] + "</div>");
+  $("#timer").html("Timer: 10");
+  $("#info").html("");
   runTimer();
-  // for (i=0; i<thisQuestion.answers.length; i++) {
-  //   // document.getElementById("answers").innerHTML += thisQuestion.answers[i];
-  //   $("#answers").append("<div class='answers'>" + thisQuestion.answers[i] + "</div>");
-  // }
+
 }
-
-// function timer() {
-//   alert("timer");
-// }
-
 
 function setGame() {
 
@@ -175,6 +192,9 @@ function setGame() {
   }
 
   else {
+    setTimeout(function(){ askQuestion(); }, 9000);
+    setQuestionsIndex();
+    console.log("questionsIndex last part " + questionsIndex[questionsIndex.length - 1]);
     introRules();
   }
 }
