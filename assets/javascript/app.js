@@ -13,8 +13,7 @@ var losses = 0;
 var guessCount = 15;
 
 // Array of objects to hold the questions
-var game = [{
-    "question" : "The principal creators of Unix",
+var game = [{"question" : "The principal creators of Unix",
     "correctAnswer" : 2,
     "answers": 
       ["Brian Kernighan and Bill Joy", 
@@ -23,8 +22,7 @@ var game = [{
       "Steve Jobs and Steve Wozniak" ],
     "Info" : "Ritchie is also famous as the creator of the C programming language, which descended from Kernighan's B language."},
 
-    [{  
-    "question" : "A well-known computer scientist who rose to the rank of Rear Admiral in the US Navy",
+    {"question" : "A well-known computer scientist who rose to the rank of Rear Admiral in the US Navy",
     "correctAnswer" : 0,
     "answers": 
       ["Grace Hopper", 
@@ -33,8 +31,7 @@ var game = [{
       "Chester Nimitz" ],
     "Info" : "Among many accomplishments Grace Hopper led a team that created the first compiler for a programming language."},
 
-    [{  
-    "question" : "A polymath who contributed to computer science, physics, game theory, mathematics and who worked on The Manhattan Project.",
+    {"question" : "A polymath who contributed to computer science, physics, game theory, mathematics and who worked on The Manhattan Project.",
     "correctAnswer" : 3,
     "answers": 
       ["\"Manhattan\" Menzies", 
@@ -50,6 +47,31 @@ var game = [{
 // }
 
 
+function introRules(){
+  alert("introRules");
+}
+
+function askQuestion() {
+  var gameIndex = Math.floor((Math.random() * (game.length - 1) + 1));
+  thisQuestion = game.splice( gameIndex, 1 )[0]; 
+
+  document.getElementById("question").innerHTML = thisQuestion.question;
+  
+  $("#answer1").append("<div class='answers'>" + thisQuestion.answers[0] + "</div>");
+  $("#answer2").append("<div class='answers'>" + thisQuestion.answers[1] + "</div>");
+  $("#answer3").append("<div class='answers'>" + thisQuestion.answers[2] + "</div>");
+  $("#answer4").append("<div class='answers'>" + thisQuestion.answers[3] + "</div>");
+  // for (i=0; i<thisQuestion.answers.length; i++) {
+  //   // document.getElementById("answers").innerHTML += thisQuestion.answers[i];
+  //   $("#answers").append("<div class='answers'>" + thisQuestion.answers[i] + "</div>");
+  // }
+}
+
+function timer() {
+  alert("timer");
+}
+
+
 function setGame() {
 
   // If this isn't the first round, pause to show the answer before overwriting.
@@ -59,9 +81,10 @@ function setGame() {
    // }
 
   // Randomly pick a word and take it out of the array so it won't be used again
-  var wordsIndex = Math.floor((Math.random() * (words.length - 1) + 0));
-  thisWord = words.splice( wordsIndex, 1 )[0]; 
-  blankWord = thisWord;
+  
+
+  askQuestion();
+  // blankWord = thisWord;
 
   // Set the guesses back to starting values
   guessCount = 15;
@@ -69,10 +92,10 @@ function setGame() {
 
 
   // document.getElementById("blanks").innerHTML = ("This word is " + thisWord);
-  blankWord = setToBlanks(blankWord);
-  document.getElementById("theAnswer").innerHTML = "";
+  // blankWord = setToBlanks(blankWord);
+  
   // document.getElementById("playAgain").innerHTML = ("");
-  writeBlanks(blankWord);
+  // writeBlanks(blankWord);
 }
 
 
