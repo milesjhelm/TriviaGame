@@ -14,8 +14,6 @@ body {
 	width: 100%;
 	max-width: 960px;
 	border-radius: 5px;
-/*	margin: 0 auto;
-	clear: both;*/
 }
 
 h1, h2, h3, p {
@@ -33,6 +31,7 @@ p:last-child {
 
 #question {
 	font-size: 25px;
+	text-shadow: 2px 2px 5px #fff2e6;
 }
 
 #answers {
@@ -40,10 +39,19 @@ p:last-child {
 	font-size: 25px;
 }
 
+#timer {
+	text-align: center;
+	font-size: 35px;
+}
+
 .answers {
-	background: #4aaaa5;
+	background: #fff2e6;
 	text-align: center;
 	font-size: 25px;
+}
+
+.answers:hover {
+	box-shadow: 10px 10px 45px #555;
 }
 
 
@@ -56,46 +64,15 @@ h1, h2, h3, #wins, #losses {
 h1 {
 	font-size: 30px;
 	line-height: 49px;
-	border-bottom: 3px solid #ddd;
+	border-bottom: 3px solid #fff2e6;
 	padding-bottom: 20px;
 }
 
-h2, h3, #wins, #losses{
+h2, h3, #wins, #losses {
 	font-size: 22px;
 }
 
-/*#masthead {
-	background: #fff;
-	margin: 0 0 30px;
-	z-index: 99;
-	color: #fff;
-	overflow: auto;
-	border-bottom: 2px solid #ccc;
-	position: fixed;
-	width: 100%;
-}*/
 
-/*#logo {
-	width: 250px;
-	height: 90px;
-	background: #4aaaa5;
-	float: left;
-	font-family: 'Georgia', Times, Times New Roman, serif;
-	text-align: center;
-	line-height: 90px;
-	color: #fff;
-	font-weight: 700;
-	font-size: 30px;
-	text-decoration: none;
-}*/
-
-
-
-/*#main-container {
-	padding-top: 20px;
-	background: #eee;
-	height: 480px;
-}*/
 
 #main-container {    
 	/*background: #eee;           */
@@ -111,17 +88,9 @@ h2, h3, #wins, #losses{
     -ms-transform: translate(-50%, -50%);
 }
 
-/*#game-panel {
-	background: #eee;
-	padding: 30px;
-	margin: 0 0 40px 0;
-	width: 100%;
-	max-width: 650px;
-	float: left;
-	border: 1px solid #ddd;
-}*/
 
-#guillotine {
+
+/*#guillotine {
 	width: 200px;
 	border-radius: 5px;
 }
@@ -130,12 +99,12 @@ h2, h3, #wins, #losses{
 	letter-spacing: 10px;
 	font-size: 35px;
 	
-}
+}*/
 
-#guesses {
+/*#guesses {
 	font-family: 'Snell Roundhand', Papyrus, Times, Times New Roman, serif;
 }
-
+*/
 
 #copyright {
 	font-family: 'Arial', 'Helvetica Neue', Helvetica, sans-serif;
@@ -147,6 +116,8 @@ h2, h3, #wins, #losses{
 	text-align: right;
 }
 
+
+/* Set the height of the question div so that the page doesn't jump around */
 #question {
 	height: 120px;
 }

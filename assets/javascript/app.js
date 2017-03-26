@@ -9,8 +9,9 @@ var newGame = true;
 var wins = 0;
 var losses = 0;
 
-// Number of guesses the user can make
-var guessCount = 15;
+//  Variables for the timer
+var number = 10;
+var intervalId;
 
 // Array of objects to hold the questions
 var game = [{"question" : "The principal creators of Unix",
@@ -31,6 +32,34 @@ var game = [{"question" : "The principal creators of Unix",
       "Chester Nimitz" ],
     "Info" : "Among many accomplishments Grace Hopper led a team that created the first compiler for a programming language."},
 
+    {"question" : "Created the Pascal Programming Language",
+    "correctAnswer" : 3,
+    "answers": 
+      ["Blaise Pascal", 
+      "Niklaus Wirth",
+      "Dennis Ritchie",
+      "Pedro Pascal" ],
+    "Info" : "Wirth named the programming language after Blaise Pascal"},
+
+    {"question" : "Co-authors of Mosaic, a web browser that popularized the World Wide Web",
+    "correctAnswer" : 0,
+    "answers": 
+      ["Marc Andreessen and Eric Bina", 
+      "Larry Page and Sergey Brin",
+      "Cameron and Tyler Winklevoss",
+      "Mark Zuckerberg and Dustin Moskovitz" ],
+    "Info" : "Andreeson later co-founded Netscape."},
+
+    {"question" : "Mathematician who invented the modern binary number system",
+    "correctAnswer" : 2,
+    "answers": 
+      ["George Boole", 
+      "Ahn Ahff",
+      "Gottfried Leibniz",
+      "William Hunting" ],
+    "Info" : "Not the inventor of binary notation, but George Boole is important to computer science (see Boolean Algebra)."},
+
+
     {"question" : "A polymath who contributed to computer science, physics, game theory, mathematics and who worked on The Manhattan Project.",
     "correctAnswer" : 3,
     "answers": 
@@ -38,7 +67,16 @@ var game = [{"question" : "The principal creators of Unix",
       "Alan Turing",
       "Ada Lovelace",
       "John von Neumann" ],
-    "Info" : "Considered by many to be one of the greatest geniuses of all time, he played a crucial role in formulating modern computer theory and architecture."}
+    "Info" : "Considered by many to be one of the greatest geniuses of all time, he played a crucial role in formulating modern computer theory and architecture."},
+
+    {"question" : "The principal creators of Unix",
+    "correctAnswer" : 2,
+    "answers": 
+      ["Brian Kernighan and Bill Joy", 
+      "Linus Torvalds and Bill Joy",
+      "Brian Kernighan and Dennis Ritchie",
+      "Steve Jobs and Steve Wozniak" ],
+    "Info" : "Ritchie is also famous as the creator of the C programming language, which descended from Kernighan's B language."}
     ];
 
 
@@ -46,7 +84,44 @@ var game = [{"question" : "The principal creators of Unix",
 //   document.getElementById("demo").innerHTML += "<p>" + myObj.cars[i]["question"] + " " + myObj.cars[i]["answer"] + "</p>";
 // }
 
+// Timer functions
+function runTimer() {
+  intervalId = setInterval(decrement, 1000);
+}
 
+//  The decrement function.
+function decrement() {
+
+  //  Decrease number by one.
+  number--;
+
+  //  Show the number in the #show-number tag.
+  $("#timer").html("<br>Time: " + number);
+  // $("#timer").html("<a href='#tabs-1'>Countdown:</a><a href='#tabs-2'>" + number + "</a>");
+
+
+  //  Once number hits zero...
+  if (number === 0) {
+
+    //  ...run the stop function.
+    stop();
+
+    //  Alert the user that time is up.
+    alert("Time Up!");
+  }
+}
+
+//  The stop function
+function stop() {
+
+  //  Clears our intervalId
+  //  We just pass the name of the interval
+  //  to the clearInterval function.
+  clearInterval(intervalId);
+}
+
+
+// Intro panel
 function introRules(){
   alert("introRules");
 }
@@ -84,6 +159,7 @@ function setGame() {
   
 
   askQuestion();
+  runTimer();
   // blankWord = thisWord;
 
   // Set the guesses back to starting values
