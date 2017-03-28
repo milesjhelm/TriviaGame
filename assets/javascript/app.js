@@ -13,7 +13,7 @@ var wrong = 0;
 var firstAnswer = true;
 
 // The number of questions to be asked;
-var totalQuestions = 2;
+var totalQuestions = 6;
 
 //  Variables for the timer
 var timerNumber = 10;
@@ -132,6 +132,14 @@ var game = [{"question" : "The principal creators of Unix",
       "Bill Joy" ],
     "info" : "Bill Joy. He went on to co-found Sun Microsystems."},
 
+    {"question" : "Famous code-breaker during WWII",
+    "correctAnswer" : "answer4",
+    "answers": 
+      ["Jon von Neumann", 
+      "Edward Nigma",
+      "Konrad Zuse",
+      "Alan Turing" ],
+    "info" : "Alan Turing. He and von Neumann working mostly separately established many paradigms for modern computing."},
 
     {"question" : "The principal creators of Unix",
     "correctAnswer" : "answer3",
@@ -148,8 +156,13 @@ var game = [{"question" : "The principal creators of Unix",
 // pool of questions, but they won't have all the same questions and the questions won't come in
 // the same order.
 var questionsIndex;
+
 function setQuestionsIndex() {
-  for (var i = 0; i < game.length; i++);
+
+  questionsIndex = [0];
+  for (var i = 1; i < game.length; i++) {
+    questionsIndex += i;
+  }
 }
 
 
@@ -255,7 +268,9 @@ function showScore() {
     "<br><br>Get ready to play again!"
     );
   $("#results").show()
-  totalQuestions = 10;
+  totalQuestions = 6;
+  right = 0;
+  wrong = 0;
   setTimeout(function(){ $("#results").hide(); }, 7000);
   setTimeout(function(){ setGame(); }, 7000);
 
@@ -270,8 +285,17 @@ function askQuestion() {
   else {
     firstAnswer = true;
     timerNumber = 10;
+
+    //working start
     var gameIndex = Math.floor((Math.random() * (game.length - 1) + 1));
     thisQuestion = game.splice( gameIndex, 1 )[0]; 
+    //working end
+    //experiment start
+    // var gameIndex = Math.floor((Math.random() * (questionsIndex.length - 1) + 1));
+
+    // var thisIndex = questionsIndex.splice( gameIndex, 1 )[0]; 
+    // thisQuestion = game[questionsIndex[]];
+    //experiment end
 
     document.getElementById("question").innerHTML = thisQuestion.question;
 
