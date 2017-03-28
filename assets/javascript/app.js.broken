@@ -1,9 +1,9 @@
 // <script type="text/javascript">
 
-// These are the words for the Hangman game.
 
-//Indicate if this is the first word the user is guessing. This isn't used in v1.0
-var newGame = true;
+
+//Indicate if this is the first guess
+var newGame = false;
 
 // Keep track of wins and losses
 var right = 0;
@@ -12,8 +12,7 @@ var wrong = 0;
 // Make sure user can only choose one answer.
 var firstAnswer = true;
 
-// The number of questions to be asked;
-var totalQuestions = 10;
+
 
 //  Variables for the timer
 var timerNumber = 10;
@@ -85,24 +84,27 @@ var game = [{"question" : "The principal creators of Unix",
     "info" : "Ritchie is also famous as the creator of the C programming language."}
     ];
 
-// This array of integers is used to keep track of which questions have been asked.
+
+// The number of questions to be asked;
+var questionsLeft = 5;
+// questionsIndex is an array of integers used to keep track of which questions have been asked.
 // If the user decides to play the game again, the questions will be drawn from the same overall
-// pool of questions, but they won't have all the same questions and the questions won't come in
-// the same order.
-var questionsIndex;
-function setQuestionsIndex() {
-  for (var i = 0; i < game.length; i++);
-}
+// pool of questions (in the array called 'game') but they won't have all the same questions and 
+// the questions probably won't be asked in the same order.
+var questionsIndex[0,1,2,3,4,5,6];
+// function setQuestionsIndex() {
+//   for (var i = 0; i < game.length; i++);
+// }
 
 
 
 $(".answer").click(function(){
 
 
-    // alert("The paragraph was clicked.");
+    alert("The paragraph was clicked.");
     if (firstAnswer === true) {
       if ((thisQuestion.correctAnswer) === ($(this).attr("id"))) {
-        // alert("Right");
+        alert("Right");
         // $($(this).attr("id")).text("right");
         $("#info").html("<div><bold>Correct!</bold>" + thisQuestion.info + "</div>");
         right++;
@@ -111,6 +113,7 @@ $(".answer").click(function(){
       else {
         $("#info").html("<div><bold>Incorrect!</bold>" + thisQuestion.info + "</div>");
         setTimeout(function(){ askQuestion(); }, 9000);
+        alert("wrong");
         wrong++;
       }
       firstAnswer = false;
@@ -162,14 +165,13 @@ function stop() {
 
 // Intro panel
 function introRules(){
-  $("#introRules").html("Hi Miles");
-    newGame = false;
-    setTimeout(function(){ $("#introRules").hide(); }, 8000);
-    setTimeout(function(){ askQuestion(); }, 9000);
+  $("#main-area").html("Hi Miles");
+  setTimeout(function(){ setGame(); }, 9000);   
 }
 
 function askQuestion() {
-  firstAnswer = true;
+  questionsLeft--;
+  firstAnswer = false;
   timerNumber = 10;
   var gameIndex = Math.floor((Math.random() * (game.length - 1) + 1));
   thisQuestion = game.splice( gameIndex, 1 )[0]; 
@@ -186,19 +188,22 @@ function askQuestion() {
 
 }
 
+// function getReady()
+
 function setGame() {
 
   if (newGame === false) {
-    
     askQuestion();
     
   }
 
   else {
-    introRules();
-    // setTimeout(function(){ askQuestion(); }, 9000);
     // setQuestionsIndex();
     // console.log("questionsIndex last part " + questionsIndex[questionsIndex.length - 1]);
+    newGame = false;
+    askQuestion();
     
   }
 }
+
+
