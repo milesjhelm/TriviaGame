@@ -251,7 +251,9 @@ function showScore() {
   $("#info").hide();
 
   $("#results").html("Finished!<br>" +
-    "You scored " + right + "out of " + (right + wrong))
+    "You scored " + right + " out of " + (right + wrong) +
+    "<br><br>Get ready to play again!"
+    );
   $("#results").show()
   totalQuestions = 10;
   setTimeout(function(){ $("#results").hide(); }, 7000);
