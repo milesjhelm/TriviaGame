@@ -13,7 +13,7 @@ var wrong = 0;
 var firstAnswer = true;
 
 // The number of questions to be asked;
-var totalQuestions = 10;
+var totalQuestions = 2;
 
 //  Variables for the timer
 var timerNumber = 10;
@@ -140,7 +140,7 @@ var game = [{"question" : "The principal creators of Unix",
       "Linus Torvalds and Bill Joy",
       "Ken Thompson and Dennis Ritchie",
       "Steve Jobs and Steve Wozniak" ],
-    "info" : "Ritchie is also famous as the creator of the C programming language."}
+    "info" : "Ken Thompson and Dennis Ritchie. Ritchie is also famous as the creator of the C programming language."}
     ];
 
 // This array of integers is used to keep track of which questions have been asked.
@@ -162,19 +162,27 @@ $(".answer").click(function(){
       if ((thisQuestion.correctAnswer) === ($(this).attr("id"))) {
         // alert("Right");
         // $($(this).attr("id")).text("right");
-        $("#info").html("<div><bold>Correct!</bold>" + thisQuestion.info + "</div>");
+        $("#info").html("Correct! " + thisQuestion.info + "</div>");
         right++;
+        totalQuestions--;
         setTimeout(function(){ askQuestion(); }, 9000);
       }
       else {
-        $("#info").html("<div><bold>Incorrect!</bold>" + thisQuestion.info + "</div>");
+        $("#info").html("Incorrect! The correct answer is " + thisQuestion.info + "</div>");
         setTimeout(function(){ askQuestion(); }, 9000);
         // $(this).css("color", "red");
         wrong++;
+        totalQuestions--;
+
       }
       firstAnswer = false;
       stop(); 
     }
+
+
+    // if (totalQuestions <= 0) {
+    //   showScore();
+    //  }
 
    
 });
@@ -202,9 +210,10 @@ function decrement() {
     stop();
 
     //  Alert the user that time is up.
-    $("#info").html("Time's up! " + thisQuestion.info + "</div>");
+    $("#info").html("Time's up! The answer is " + thisQuestion.info + "</div>");
     setTimeout(function(){ askQuestion(); }, 9000);
     wrong++;
+    totalQuestions--;
     timerNumber = 10;
   }
 }
@@ -224,41 +233,77 @@ function introRules(){
   $("#introRules").html("Test your knowledge of those who advanced computers and their applications.");
   newGame = false;
   setTimeout(function(){ $("#introRules").hide(); }, 7000);
-  setTimeout(function(){ $("#introRules").html("Get ready, you only have a few seconds for each question"); }, 7700);
+  setTimeout(function(){ $("#introRules").html("Get ready, you only have a few<br>seconds for each question!"); }, 7700);
   setTimeout(function(){ $("#introRules").show(); }, 7701);
   // $("#introRules").html("Get ready");
   setTimeout(function(){ $("#introRules").hide(); }, 12000);
   setTimeout(function(){ askQuestion(); }, 13000);
 }
 
+function showScore() {
+
+  $("#question").hide();
+  $("#answer1").hide();
+  $("#answer2").hide();
+  $("#answer3").hide();
+  $("#answer4").hide();
+  $("#timer").hide();
+  $("#info").hide();
+
+  $("#results").html("Finished!<br>" +
+    "You scored " + right + "out of " + (right + wrong))
+  $("#results").show()
+  totalQuestions = 10;
+  setTimeout(function(){ $("#results").hide(); }, 7000);
+  setTimeout(function(){ setGame(); }, 7000);
+
+}
+
 function askQuestion() {
-  firstAnswer = true;
-  timerNumber = 10;
-  var gameIndex = Math.floor((Math.random() * (game.length - 1) + 1));
-  thisQuestion = game.splice( gameIndex, 1 )[0]; 
 
-  document.getElementById("question").innerHTML = thisQuestion.question;
+  if (totalQuestions <= 0) {
+    showScore();
+  }
 
-  // $("#main-area").css("color", "#994d00")
+  else {
+    firstAnswer = true;
+    timerNumber = 10;
+    var gameIndex = Math.floor((Math.random() * (game.length - 1) + 1));
+    thisQuestion = game.splice( gameIndex, 1 )[0]; 
 
-  
-  $("#answer1").html("<div class='answers'>" + thisQuestion.answers[0] + "</div>");
-  $("#answer2").html("<div class='answers'>" + thisQuestion.answers[1] + "</div>");
-  $("#answer3").html("<div class='answers'>" + thisQuestion.answers[2] + "</div>");
-  $("#answer4").html("<div class='answers'>" + thisQuestion.answers[3] + "</div>");
-  $("#timer").html("Timer: 10");
-  $("#info").html("");
-  runTimer();
+    document.getElementById("question").innerHTML = thisQuestion.question;
+
+    // $("#main-area").css("color", "#994d00")
+    $("#question").show();
+    $("#answer1").show();
+    $("#answer2").show();
+    $("#answer3").show();
+    $("#answer4").show();
+    $("#timer").show();
+    $("#info").show();
+
+    
+    $("#answer1").html("<div class='answers'>" + thisQuestion.answers[0] + "</div>");
+    $("#answer2").html("<div class='answers'>" + thisQuestion.answers[1] + "</div>");
+    $("#answer3").html("<div class='answers'>" + thisQuestion.answers[2] + "</div>");
+    $("#answer4").html("<div class='answers'>" + thisQuestion.answers[3] + "</div>");
+    $("#timer").html("Timer: 10");
+    $("#info").html("");
+    runTimer(); 
+  }
 
 }
 
 function setGame() {
+
+  $("#results").hide()
 
   if (newGame === false) {
     askQuestion();
   }
 
   else {
+    setQuestionsIndex();
     introRules();    
   }
 }
