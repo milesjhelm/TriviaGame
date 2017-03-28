@@ -27,7 +27,7 @@ var game = [{"question" : "The principal creators of Unix",
       "Linus Torvalds and Bill Joy",
       "Ken Thompson and Dennis Ritchie",
       "Steve Jobs and Steve Wozniak" ],
-    "info" : "Ritchie is also famous as the creator of the C programming language."},
+    "info" : "Ken Thompson and Dennis Ritchie. Ritchie is also famous as the creator of the C programming language."},
 
     {"question" : "A well-known computer scientist who rose to the rank of Rear Admiral in the US Navy",
     "correctAnswer" : "answer1",
@@ -36,7 +36,7 @@ var game = [{"question" : "The principal creators of Unix",
       "Horatio Nelson",
       "Jack Aubrey",
       "Chester Nimitz" ],
-    "info" : "Among many accomplishments Grace Hopper led a team that created the first compiler for a programming language."},
+    "info" : "Grace Hopper. Among many accomplishments Grace Hopper led a team that created the first compiler for a programming language."},
 
     {"question" : "Created the Pascal Programming Language",
     "correctAnswer" : "answer2",
@@ -45,7 +45,7 @@ var game = [{"question" : "The principal creators of Unix",
       "Niklaus Wirth",
       "Dennis Ritchie",
       "Pedro Pascal" ],
-    "info" : "Wirth named the programming language after Blaise Pascal"},
+    "info" : "Niklaus Wirth. Wirth named the programming language after Blaise Pascal"},
 
     {"question" : "Co-authors of Mosaic, a web browser that popularized the World Wide Web",
     "correctAnswer" : "answer1",
@@ -54,7 +54,7 @@ var game = [{"question" : "The principal creators of Unix",
       "Larry Page and Sergey Brin",
       "Cameron and Tyler Winklevoss",
       "Mark Zuckerberg and Dustin Moskovitz" ],
-    "info" : "Andreeson later co-founded Netscape."},
+    "info" : "Marc Andreessen and Eric Bina. Andreeson later co-founded Netscape."},
 
     {"question" : "Mathematician who invented the modern binary number system",
     "correctAnswer" : "answer3",
@@ -63,7 +63,7 @@ var game = [{"question" : "The principal creators of Unix",
       "Ahn Ahff",
       "Gottfried Leibniz",
       "William Hunting" ],
-    "info" : "Not the inventor of binary notation, but George Boole is important to computer science (see Boolean Algebra)."},
+    "info" : "Gottfried Leibniz. George Boole was not the inventor of binary notation, but he is important to computer science (see Boolean Algebra)."},
 
 
     {"question" : "A polymath who contributed to computer science, physics, game theory, mathematics and who worked on The Manhattan Project.",
@@ -73,7 +73,65 @@ var game = [{"question" : "The principal creators of Unix",
       "Alan Turing",
       "Ada Lovelace",
       "John von Neumann" ],
-    "info" : "Considered by many to be one of the greatest geniuses of all time, he played a crucial role in formulating modern computer theory and architecture."},
+    "info" : "John von Neumann. Considered by many to be one of the greatest geniuses of all time, he played a crucial role in formulating modern computer theory and architecture."},
+
+    {"question" : "Designed a programmable mechanical computer in the 19th century",
+    "correctAnswer" : "answer4",
+    "answers": 
+      ["George Boole", 
+      "James Clerk Maxwell",
+      "Bill Gates",
+      "Charles Babbage" ],
+    "info" : "Charles Babbage. His most complex designs have yet to be built."},
+
+
+    {"question" : "Invented the relational database",
+    "correctAnswer" : "answer1",
+    "answers": 
+      ["Ted Codd", 
+      "James Watson",
+      "Larry Ellison",
+      "Jean-Auguste-Dominique Ingres" ],
+    "info" : "Edgar Frank \"Ted\" Codd worked for IBM when he devised the model, but Larry Ellison founded Oracle based on the relational database model."},
+
+    {"question" : "Nickname given to a group of employees who left Shockley Semiconductor to found Fairchild Semiconductor",
+    "correctAnswer" : "answer4",
+    "answers": 
+      ["The Mercury Seven", 
+      "The Silicon Seven",
+      "The Hateful Eight",
+      "The Traitorous Eight" ],
+    "info" : "The Traitorous Eight. Many of the people involved in Fairchild Semiconductor went on to found other companies, including Intel and AMD."},
+
+
+    {"question" : "Conceived an algorithm for finding the shortest paths between nodes in a graph",
+    "correctAnswer" : "answer3",
+    "answers": 
+      ["Adriaan van Wijngaarden", 
+      "Johan van der Smut",
+      "Edsger Wybe Dijkstra",
+      "Niklaus Wirth" ],
+    "info" : "Edsger Wybe Dijkstra. The algorithm is called \"Dijkstra's Theorem.\""},
+
+
+    {"question" : "Kenneth E. Iverson named the programming language APL as an acronym for...",
+    "correctAnswer" : "answer2",
+    "answers": 
+      ["Aligned Process Launcher", 
+      "A Programming Language",
+      "Asynchronous Pneumatic Larder",
+      "Arranged Preprocessor Loading" ],
+    "info" : "A Programming Language. APL's central datatype is the multidimensional array."},
+    
+    {"question" : "Wrote the vi editor with legendary speed",
+    "correctAnswer" : "answer4",
+    "answers": 
+      ["Andre Roussimoff", 
+      "John von Neumann",
+      "Konrad Zuse",
+      "Bill Joy" ],
+    "info" : "Bill Joy. He went on to co-found Sun Microsystems."},
+
 
     {"question" : "The principal creators of Unix",
     "correctAnswer" : "answer3",
@@ -111,6 +169,7 @@ $(".answer").click(function(){
       else {
         $("#info").html("<div><bold>Incorrect!</bold>" + thisQuestion.info + "</div>");
         setTimeout(function(){ askQuestion(); }, 9000);
+        // $(this).css("color", "red");
         wrong++;
       }
       firstAnswer = false;
@@ -162,10 +221,14 @@ function stop() {
 
 // Intro panel
 function introRules(){
-  $("#introRules").html("Hi Miles");
-    newGame = false;
-    setTimeout(function(){ $("#introRules").hide(); }, 8000);
-    setTimeout(function(){ askQuestion(); }, 9000);
+  $("#introRules").html("Test your knowledge of those who advanced computers and their applications.");
+  newGame = false;
+  setTimeout(function(){ $("#introRules").hide(); }, 7000);
+  setTimeout(function(){ $("#introRules").html("Get ready, you only have a few seconds for each question"); }, 7700);
+  setTimeout(function(){ $("#introRules").show(); }, 7701);
+  // $("#introRules").html("Get ready");
+  setTimeout(function(){ $("#introRules").hide(); }, 12000);
+  setTimeout(function(){ askQuestion(); }, 13000);
 }
 
 function askQuestion() {
@@ -175,6 +238,9 @@ function askQuestion() {
   thisQuestion = game.splice( gameIndex, 1 )[0]; 
 
   document.getElementById("question").innerHTML = thisQuestion.question;
+
+  // $("#main-area").css("color", "#994d00")
+
   
   $("#answer1").html("<div class='answers'>" + thisQuestion.answers[0] + "</div>");
   $("#answer2").html("<div class='answers'>" + thisQuestion.answers[1] + "</div>");
@@ -189,16 +255,10 @@ function askQuestion() {
 function setGame() {
 
   if (newGame === false) {
-    
     askQuestion();
-    
   }
 
   else {
-    introRules();
-    // setTimeout(function(){ askQuestion(); }, 9000);
-    // setQuestionsIndex();
-    // console.log("questionsIndex last part " + questionsIndex[questionsIndex.length - 1]);
-    
+    introRules();    
   }
 }
